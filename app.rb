@@ -18,8 +18,10 @@ get "/news" do
     @results = Geocoder.search(params["q"])
     #@geocoder_results = Geocoder.search(@results)
     @lat_long = @results.first.coordinates # => [lat, long]
-    "#{@lat_long[0]} #{@lat_long[1]}"
-    url = 
+    #"#{@lat_long[0]} #{@lat_long[1]}"
+    url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=yourkey"
+    news = HTTParty.get(url).parsed_response.to_hash
+    # news is now a Hash you can pretty print (pp) and parse for your output
     # url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=33043a374d84404e9df3c50b2cfac350"
     # news = HTTParty.get(url).parsed_response.to_hash
 end

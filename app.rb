@@ -11,10 +11,7 @@ ForecastIO.api_key = "3bb1b33e89ef956ed282a1a3c66e4827"
 
 get "/news" do
     #do everything else
-    # @location = params["q"]
-    # @geocoder_results = Geocoder.search(@location)
-    # @lat_long = @geocoder_results.first.coordinates # => [lat, long] array
-    view "news"
+
     @results = Geocoder.search(params["q"])
     @location = params["q"]
     @lat_long = @results.first.coordinates # => [lat, long]
@@ -22,14 +19,38 @@ get "/news" do
     @forecast = ForecastIO.forecast(@lat_long[0], @lat_long[1]).to_hash 
     @current_temperature = @forecast["currently"]["temperature"]
     @conditions = @forecast["currently"]["summary"]
-    puts "In #{@location}, it is currently #{@current_temperature} and #{@conditions}"
-    #"#{@lat_long[0]} #{@lat_long[1]}"
-    #url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=33043a374d84404e9df3c50b2cfac350"
-    #news = HTTParty.get(url).parsed_response.to_hash
-    #pp news 
+    "In #{@location}, it is currently #{@current_temperature} and #{@conditions}"
+    
+    day_hightemp = []
+    day_condition = []
+    for day in @forecast["daily"]["data"]
+        day_hightemp << "#{day["temperatureHigh"]}"
+        day_condition << "#{day["summary"]}"
+    "A high temperature of #{day["temperatureHigh"]} and #{day["summary"]}."
+    end
+    @listtemp = day_hightemp
+    @listcondition = day_condition
+    #@day = Time.at(day["time"]).strftime("%a")
+    
+    @url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=33043a374d84404e9df3c50b2cfac350"
+    @news = HTTParty.get(@url).parsed_response.to_hash
+    pp @news
+
+    headline_url = []
+    for headlines in @news["articles"]
+        headline_url << "#{headlines["url"]}"
+    end
+    @listurl = headline_url
+
+    headline_title = []
+    for headlinetitles in @news["articles"]
+        headline_title << "#{headlinetitles["title"]}"
+    end
+    @listtitles = headline_title
+
+
     # news is now a Hash you can pretty print (pp) and parse for your output
-    # url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=33043a374d84404e9df3c50b2cfac350"
-    # news = HTTParty.get(url).parsed_response.to_hash
+ view "news"
 end
 
 get "/" do

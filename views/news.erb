@@ -25,7 +25,40 @@
     <div class="container mt-5">
       <h1>Local News</h1>
       <p>
-      <h3> Weather and News for the Day</h3>
+      <h2> Weather and News for the Day</h2>
+      </p>
+        <div class="row">
+        <h3> Current weather in <%= @location %> </h3>
+        </div>
+        <div class="row">
+            In <%= @location %>, it is currently <%= @current_temperature %> and <%= @conditions %>
+            <% for condition in @listcondition %>
+                <div class="col-sm">
+                <%= condition %>
+                </div>
+                <% end %>   
+                <% for weather in @listtemp %>
+                <div class="col-sm">
+                A high temperature of <%= weather %>
+                </div>
+                <% end %>
+            </div>
+            
+
+        <p>
+        <% for link in @listurl %>
+            <div class="col-sm">
+                <a href="<%= link %>"><%= link %></a>
+            </div>
+        <% end %>
+        <% for name in @listtitles %>
+            <div class="col-sm-2">
+                <%= name %>
+            </div>
+        <% end %>
+    </p>
+
+      </div>
     </div>
 
     <!-- Optional JavaScript -->

@@ -25,12 +25,15 @@
   <div class="jumbotron">
   <h1 class="display-4">Newspaper</h1>
   <p class="lead"><%= @location %> Weather and News </p>
-</div>
+  </div>
 
     <div class="container mt-5">
-      <h3> It is currently <%= @current_temperature %> and <%= @conditions %> in <%= @location %> </h3>
+        <div class = "row">
+      <h3> Current Forecast </h3>
+        </div>
+      <h5> Right now it is <%= @current_temperature %> degrees and <%= @conditions %> in <%= @location %>.</h5>
       <div class = "row">
-      <h3> Upcoming forecast </h3>
+      <h3> Upcoming Forecast </h3>
       </div>
         <div class="row">
                 <ul>
@@ -56,13 +59,13 @@
 <% for link in @listurl %>
 <% for name in @listtitles %>
 <div class= "row">
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 75rem;">
  <div class="card-body">
     <h5 class="card-title"><%= name %></h5>
     <a href=<%= link %> class="card-link">Link</a>
-    </div>
-    </div>
-    </div>
+</div>
+</div>
+ </div>
   <% end %>
   <% end %>
 

@@ -1,13 +1,14 @@
 body {
-  /* Everything is Raleway */
   font-family: 'Raleway', sans-serif;
 }
-/* Except we're using more specific rules to override the headlines */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto Slab', serif;
-}
-/* And the "logo" */
+
 .jumbotron {
-  font-family: 'Permanent Marker', cursive;
-  font-size: 30px;
+  color: darkblue;
+
 }
+
+h3 {
+    font-family: 'Lato', sans-serif;
+    color: darkblue;
+}
+

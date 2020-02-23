@@ -50,7 +50,6 @@ get "/news" do
     end
     @listtitles = headline_title
 
-    # news is now a Hash you can pretty print (pp) and parse for your output
  view "news"
 end
 

@@ -18,47 +18,48 @@
     <!-- Your own CSS -->
     <link rel="stylesheet" href="/styles.css">
 
-    <title>Weather and News</title>
+    <title>Newspaper</title>
   </head>
   <body>
 
+  <div class="jumbotron">
+  <h1 class="display-4">Newspaper</h1>
+  <p class="lead"><%= @location %> Weather and News </p>
+</div>
+
     <div class="container mt-5">
-      <h1>Local News</h1>
-      <p>
-      <h2> Weather and News for the Day</h2>
-      </p>
+      <h3> It is currently <%= @current_temperature %> and <%= @conditions %> in <%= @location %> </h3>
+      <div class = "row">
+      <h3> Upcoming forecast </h3>
+      </div>
         <div class="row">
-        <h3> Current weather in <%= @location %> </h3>
-        </div>
-        <div class="row">
-            In <%= @location %>, it is currently <%= @current_temperature %> and <%= @conditions %>
+                <ul>
+                <% for weather in @listtemp %>
+                <div class="col-sm">
+                <%= weather %>
+                </div>
+                <% end %>
+                </ul>
+                <ul>
             <% for condition in @listcondition %>
                 <div class="col-sm">
                 <%= condition %>
                 </div>
-                <% end %>   
-                <% for weather in @listtemp %>
-                <div class="col-sm">
-                A high temperature of <%= weather %>
-                </div>
                 <% end %>
-            </div>
+                </ul>
+        </div>
             
+    <div class = "row">
+      <h3> Top Headlines </h3>
+      </div>
 
-        <p>
+    <div class="row">
         <% for link in @listurl %>
-            <div class="col-sm">
-                <a href="<%= link %>"><%= link %></a>
-            </div>
         <% end %>
         <% for name in @listtitles %>
-            <div class="col-sm-2">
-                <%= name %>
-            </div>
+            <a href="<%= link %>"><%= name %></a>
         <% end %>
-    </p>
-
-      </div>
+   </div>
     </div>
 
     <!-- Optional JavaScript -->
